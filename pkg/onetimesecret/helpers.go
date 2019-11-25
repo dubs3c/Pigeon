@@ -1,4 +1,4 @@
-package helpers
+package onetimesecret
 
 import (
 	"crypto/rand"
@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 )
 
 // RenderTemplate : Dynamically render templates
@@ -35,4 +36,24 @@ func GenerateToken() (string, error) {
 	h.Write(b)
 	encodedToken := hex.EncodeToString(h.Sum(nil))[:32]
 	return encodedToken, nil
+}
+
+// IsSecretValid : Check weather a given secret is valid
+func IsSecretValid(secret *Secret) bool {
+	currentTime := time.Now()
+	zone, offset := currentTime.Local().Zone()
+	loc := time.FixedZone(zone, offset)
+
+	expiredDatetime, err := time.ParseInLocation("2006-01-02 15:04:05", secret.expire, loc)
+	if err != nil {
+		log.Println("Error: Converting time failed: ", err)
+		return false
+	}
+	return secret.views <= secret.maxviews && expiredDatetime.After(currentTime)
+}
+
+// Return404 : return page not found
+func Return404(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+	RenderTemplate("secret", nil, w, r)
 }
