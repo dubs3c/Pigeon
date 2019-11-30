@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -52,7 +53,8 @@ func GetSecretHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	valid := IsSecretValid(secret)
+	currentTime := time.Now()
+	valid := IsSecretValid(currentTime, secret)
 
 	if !valid {
 		repository.DeleteSecret(secret.token)
@@ -100,7 +102,8 @@ func GetPasswordProtectedSecretHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	valid := IsSecretValid(secret)
+	currentTime := time.Now()
+	valid := IsSecretValid(currentTime, secret)
 
 	if !valid {
 		repository.DeleteSecret(secret.token)
@@ -144,8 +147,6 @@ func IndexPostHandler(w http.ResponseWriter, r *http.Request) {
 		maxviews: maxviews,
 		views:    0,
 	}
-
-	log.Println(secret)
 
 	err = repository.CreateSecret(secret)
 

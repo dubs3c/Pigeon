@@ -39,8 +39,7 @@ func GenerateToken() (string, error) {
 }
 
 // IsSecretValid : Check weather a given secret is valid
-func IsSecretValid(secret *Secret) bool {
-	currentTime := time.Now()
+func IsSecretValid(currentTime time.Time, secret *Secret) bool {
 	zone, offset := currentTime.Local().Zone()
 	loc := time.FixedZone(zone, offset)
 
