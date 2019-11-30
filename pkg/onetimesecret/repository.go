@@ -36,7 +36,7 @@ func (db *DB) GetSecretByTokenAndPassword(token string, password string) (*Secre
 
 // CreateSecret : Create a one-time secret
 func (db *DB) CreateSecret(secret Secret) error {
-	_, err := db.Exec("INSERT INTO Secrets(token, secret, password, expire, maxviews, views) VALUES(?, ?, ?, datetime('now', ?, 'localtime'), ?, ?)", secret.token, secret.message, secret.password, secret.expire, secret.maxviews, secret.views)
+	_, err := db.Exec("INSERT INTO Secrets(token, secret, password, expire, maxviews, views) VALUES(?, ?, ?, datetime('now', +?, 'localtime'), ?, ?)", secret.token, secret.message, secret.password, secret.expire, secret.maxviews, secret.views)
 	return err
 }
 

@@ -9,6 +9,11 @@ To learn golang.
 
 ## Installing
 
+```
+go get github.com/gorilla/mux
+go get github.com/mattn/go-sqlite3
+go build -o build/pigeon cmd/main.go
+```
 
 ## Contribute
 Any feedback or ideas are welcome! Want to improve something? Create a pull request!
