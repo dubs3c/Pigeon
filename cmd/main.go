@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/mjdubell/pigeon/pkg/onetimesecret"
+	"github.com/mjdubell/Pigeon/pkg/onetimesecret"
 )
 
 const (
