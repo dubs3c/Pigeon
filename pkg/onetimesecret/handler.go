@@ -120,7 +120,12 @@ func GetPasswordProtectedSecretHandler(w http.ResponseWriter, r *http.Request) {
 func IndexPostHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
-	maxviews, err := strconv.Atoi(r.PostForm.Get("maxview"))
+	maxview := r.PostForm.Get("maxview")
+
+	if maxview == "" {
+		maxview = "1"
+	}
+	maxviews, err := strconv.Atoi(maxview)
 
 	if err != nil {
 		log.Println("maxviews has to be an integer")
