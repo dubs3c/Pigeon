@@ -1,6 +1,8 @@
 
 # Pigeon
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/mjdubell/Pigeon)](https://goreportcard.com/report/github.com/mjdubell/Pigeon)
+
 Pig3on is a one-time secret program. Enter any secret you want and you'll get an unique link containing your secret. The secret will be destroyed after maximum time has passed or if the number of views has been reached.
 
 ## Motivation
