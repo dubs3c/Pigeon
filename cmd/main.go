@@ -24,7 +24,7 @@ func main() {
 	http.Handle("/", router)
 
 	log.Println("Starting web server...")
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(http.ListenAndServe("127.0.0.1:"+port, nil))
 
 	defer db.Close()
 }
