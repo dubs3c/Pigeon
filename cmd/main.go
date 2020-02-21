@@ -19,12 +19,11 @@ func main() {
 	fs := http.FileServer(http.Dir(staticDir))
 
 	router := onetimesecret.Router(db)
-
+	defer db.Close()
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.Handle("/", router)
 
 	log.Println("Starting web server...")
 	log.Fatal(http.ListenAndServe("127.0.0.1:"+port, nil))
 
-	defer db.Close()
 }
